@@ -1,11 +1,13 @@
 ﻿int[] nums = {1, 2, 3, 4, 5, 6, 7};
 Array<int> numm = new Array<int>(nums);
-
+numm.AddData(9, 3);
 numm.Print();
-numm.AddData(35, 3);
+numm.ReplaceData(3, 6);
 numm.Print();
-numm.ReplaceData(8, 5);
+numm.RemoveData(5);
 numm.Print();
+Console.WriteLine(numm.GetByIndex(4));
+Console.WriteLine(numm.GetLength());
 class Array<B>
 {
     public void AddData(B value, int index) 
@@ -57,17 +59,20 @@ class Array<B>
     }
     public void RemoveData(int index) 
     {
-        B[] temp = new B[Ar.Length];
-        for (int i = 0; i < index - 1; i++)
+        if (index < Ar.Length)
         {
-           temp[i] = Ar[i];
+            B[] temp = new B[Ar.Length - 1];
+            for (int i = 0; i < index - 1; i++)
+            {
+                temp[i] = Ar[i];
+            }
+            for (int i = index-1; i < Ar.Length - 1; i++)
+            {
+                temp[i] = Ar[i+1];
+            }
+            Ar = temp;
         }
-        for (int i = index; i < Ar.Length - 1; i++)
-        {
-            temp[i] = Ar[i];
-        }
-        Ar = temp;
-        Array.Clear(temp!);
+        else Console.WriteLine("Write correct index");
     }
     public B GetByIndex(int index) 
     {
@@ -92,4 +97,3 @@ class Array<B>
         Ar = array;
     }
 }
-//aasdadsad
